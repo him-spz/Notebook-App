@@ -1,0 +1,57 @@
+<p style="color: green"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Percent Complete</th>
+      <th>Chapters Read</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @notebook %>
+  </tbody>
+</table>
+
+
+<div>
+  <%= link_to "Edit this notebook", edit_notebook_path(@notebook) %> |
+  <%= link_to "Back to notebooks", notebooks_path %>
+
+  <%= button_to "Destroy this notebook", @notebook, method: :delete %>
+</div>
+
+<hr>
+<h1>New chapter</h1>
+
+<%= render 'chapters/form' %>
+
+<hr>
+<h1>Listing chapters</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notebook.chapters.each do |chapter| %>
+  <tr>
+    <% if chapter.persisted? %>
+      <td><%= chapter.name %></td>
+      <td><%= chapter.description %></td>
+      <td><%= chapter.status %></td>
+      <td><%= link_to 'Show', [chapter.notebook, chapter] %></td>
+      <td><%= link_to 'Edit', edit_notebook_chapter_path(chapter.notebook, chapter) %></td>
+      <td><%= button_to 'Destroy', [chapter.notebook, chapter], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%end%>
+  </tr>
+<% end %>
+</table>
+

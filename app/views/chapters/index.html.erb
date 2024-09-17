@@ -1,0 +1,27 @@
+<h1>Listing chapters</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notebook.chapters.each do |chapter| %>
+  <tr>
+    <td><%= chapter.name %></td>
+    <td><%= chapter.description %></td>
+    <td><%= chapter.status %></td>
+    <td><%= link_to 'Show', [chapter.notebook, chapter] %></td>
+    <td><%= link_to 'Edit', edit_notebook_chapter_path(chapter.notebook, chapter) %></td>
+    <td><%= button_to 'Destroy', [chapter.notebook, chapter], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Chapter', new_notebook_chapter_path(@notebook.id) %>
